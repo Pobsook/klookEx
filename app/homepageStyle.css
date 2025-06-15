@@ -1,0 +1,275 @@
+.conMainHomePage[data-hp001]{
+    display: flex;
+}
+
+.listToDo[data-hp001]{
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    margin-block: 3.7rem;
+    height: 3.7rem;
+    max-height: 3.7rem;
+    align-items: center;
+    padding-left: 12rem;
+    width: 100vw;
+    border-bottom: 1px solid #e2e2e2;
+    background-color: white;
+}
+
+li[data-hp001], li[data-hp002]{
+    list-style: none;
+    max-height: 3.7rem;
+    padding: 1.2rem 1rem;
+    outline-style: none;
+    border-bottom: 2px solid white;
+}
+
+li[data-hp002]{
+    border-radius: 30px;
+    padding: 0.6rem 0.5rem;
+    margin: 0.6rem 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+li[data-hp002]:hover{
+    background-color: #f0f0f0;
+}
+
+.conPopList[data-hp001]{
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 2;
+    left: 0;
+    top: 7.45rem;
+    width: 100%;
+    padding-left: 12rem;
+    padding-right: 10rem;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.11);
+    background-color: white;
+}
+
+.easeListTodo[data-hp003]{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.7rem;
+    border-radius: 10px;
+    padding-left: 0.5rem;
+    width: 15.3rem;
+    max-block-size: 4rem;
+    cursor: pointer;
+    height: 4rem;
+}
+
+.imgListTodo{
+    border-radius: 50%;
+    border: 1px solid rgb(255, 47, 47);
+}
+
+.conUl{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    width: 87.5vw;
+    max-block-size: 21.5rem;
+}
+
+.conOver{
+    overflow-y: scroll;
+}
+
+.conExplore{
+    max-block-size: 30rem;
+}
+
+.easeListTodo[data-hp003]:hover{
+    background-color: #f3f3f3;
+}
+
+.pTextThingtodo{
+    color: #b3b3b3;
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+}
+
+.pListThingTodo{
+    padding: 0;
+    margin: 0;
+}
+
+.list1, .list2, .list3{
+    transition: 0.3s;
+}
+
+.listToDo1, .listToDo2, .listToDo3, .listToDo4{
+    transition: border-bottom 0.3s;
+}
+
+.listToDo1:hover .list1, 
+.listToDo2:hover .list2,  
+.listToDo3:hover .list3,
+.listToDo4:hover .list4{
+    visibility: visible;
+    opacity: 1;
+}
+
+.listToDo1:hover, .listToDo2:hover, .listToDo3:hover, .listToDo4:hover{
+    border-bottom: 2px solid #ff6600;
+}
+
+.easeConExplore{
+    display: flex;
+    flex-direction: column;
+    width: 22%;
+    padding: 0rem 1rem;
+    margin-block: 1.5rem;
+}
+
+.lineEase{
+    border-right: 1px solid #f0f0f0;
+}
+
+.listTTD{
+    display: flex;
+    flex-direction: column;
+}
+
+.listTTD a{
+    text-decoration: none;
+    color: black;
+    padding: 0.6rem 0.5rem;
+    border-radius: 10px;
+}
+
+.headExplore{
+    margin: 0.5rem;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.listTTD a:hover{
+    background-color: #f3f3f3;
+}
+
+.conBanner{
+    position: relative;
+    margin-top: 7.4rem;
+    width: 100%;
+    height: 30rem;
+    color: white;
+}
+
+.banner-hp{
+    display: none;
+    width: 100%;
+    height: 30rem;
+    background-repeat: repeat;
+    background-size: cover;
+    z-index: -2;
+}
+
+.banner3{
+    position: absolute;
+    display: flex;
+}
+
+.gradiant-card {
+    position: absolute;
+    height: 30rem;
+    width: 7rem;
+    top: 0;
+}
+
+.left {
+    left: 0;
+    background: linear-gradient(to right, #00000060, #00000000);
+}
+
+.right {
+    right: 0;
+    background: linear-gradient(to left, #00000060, #00000000);
+}
+
+
+.prevnext{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.prev{
+    right: 2rem;
+}
+.next{
+    left: 2rem;
+}
+
+.ddesdw{
+    position: absolute;
+    margin-left: 12rem;
+    margin-top: 9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ddesdw h2{
+    font-size: 70px;
+    padding: 0;
+    margin: 0;
+}
+
+.ddesdw p{
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.conSearchBanner{
+    margin-top: 0.7rem;
+    position: relative;
+}
+
+.inputSearch{
+    padding-left: 3rem;
+    height: 3rem;
+    width: 46rem;
+    border-radius: 10px;
+    outline-style: none;
+    font-size: 20px;
+    border-style: none;
+}
+
+.iconSearch2{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.9rem;
+    color: #b8b8b8;
+    font-size: 20px;
+}
+
+.btn-search{
+    position: absolute;
+    right: 8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #ff6600;
+    padding: 0.8rem 2.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+    outline-style: none;
+    border-style: none;
+}

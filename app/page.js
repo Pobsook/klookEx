@@ -1,103 +1,292 @@
+// app/page.js
+
+'use client'
+
 import Image from "next/image";
+import "./homepageStyle.css";
+import touristCities from "@/imformation/touristCities";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import travelProducts from "@/imformation/topSearch";
+import useExchangeRates from "@/api/api_exchangerate";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const { currency } = useCurrency();
+
+  const topPopRegions = touristCities
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(0, 12);
+
+  const topPopDestinations = touristCities
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(0, 28);
+
+  const topPopLandmarks = touristCities
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(0, 28);
+
+  const [randomLandmark, setRandomLandmark] = useState("");
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomCityIndex = Math.floor(Math.random() * touristCities.length);
+      const city = touristCities[randomCityIndex];
+
+      // สมมติว่า city มี field `attractions` เป็น array
+      if (city && city.attractions?.length > 0) {
+        const randomAttractionIndex = Math.floor(Math.random() * city.attractions.length);
+        const attraction = city.attractions[randomAttractionIndex];
+
+        // ใส่ชื่อสถานที่ท่องเที่ยวลงใน placeholder
+        setRandomLandmark(attraction);
+      }
+    }, 3000);
+
+    // เรียกทันทีตอนเริ่ม
+    const init = () => {
+      const randomCityIndex = Math.floor(Math.random() * touristCities.length);
+      const city = touristCities[randomCityIndex];
+      if (city && city.attractions?.length > 0) {
+        const randomAttractionIndex = Math.floor(Math.random() * city.attractions.length);
+        const attraction = city.attractions[randomAttractionIndex];
+        setRandomLandmark(attraction);
+      }
+    };
+    init();
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const [isOpenModalBannerSearch, setIsOpenModalBannerSearch] = useState(false)
+  const openBannerModalSearch = () => {
+    setIsOpenModalBannerSearch(true)
+  }
+  const closeBannerSearch = () => {
+    setIsOpenModalBannerSearch(false)
+  }
+
+  const rates = useExchangeRates();
+  const convertRate = rates?.[currency] ?? 1;
+
+  const trendingCities = touristCities
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(0, 10);
+
+  const nonTrendingCities = touristCities
+    .sort((a, b) => b.searchVolume - a.searchVolume)
+    .slice(10); // ตัด top 10 ออก
+
+  function getRandomItems(array, count) {
+    const shuffled = [...array].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
+  const [randomCities, setRandomCities] = useState([]);
+
+  useEffect(() => {
+    setRandomCities(getRandomItems(nonTrendingCities, 10));
+  }, []);
+
+  const topSearchProducts = travelProducts
+    .slice(0, 10);
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency || "USD", // ✅ ใส่ fallback
+    maximumFractionDigits: 2,
+  });
+
+  return (
+    <>
+      <div data-hp001 className="conMainHomePage">
+        <ul data-hp001 className="listToDo">
+          <li data-hp001 className="listToDo1">
+            <span style={{ cursor: "pointer" }}>Popular regions</span>
+            <div data-hp001 className="conPopList list1">
+              <ul className="conUl">
+                {topPopRegions.map((data, index) => (
+                  <li key={index} data-hp003 className="easeListTodo">
+                    <div><Image className="imgListTodo" src={`/${data.image}`} width={45} height={45} alt={data.country} /></div>
+                    <div>
+                      <p className="pTextThingtodo">Things to do in</p>
+                      <p className="pListThingTodo">{data.country}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+          <li data-hp001 className="listToDo2">
+            <span style={{ cursor: "pointer" }}>Popular destinations</span>
+            <div data-hp001 className="conPopList list2">
+              <ul className="conUl conOver">
+                {topPopDestinations.map((data, index) => (
+                  <li key={index} data-hp003 className="easeListTodo">
+                    <div><Image className="imgListTodo" src={`/${data.image}`} width={45} height={45} alt={data.country} /></div>
+                    <div>
+                      <p className="pTextThingtodo">Things to do in</p>
+                      <p className="pListThingTodo">{data.city}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+          <li data-hp001 className="listToDo3">
+            <span style={{ cursor: "pointer" }}>Popular landmarks</span>
+            <div data-hp001 className="conPopList list3">
+              <ul className="conUl conOver">
+                {topPopLandmarks.map((data, index) => (
+                  <li key={index} data-hp003 className="easeListTodo">
+                    <div><Image className="imgListTodo" src={`/${data.image}`} width={45} height={45} alt={data.country} /></div>
+                    <div>
+                      <p className="pListThingTodo">{data.attractions[0]}</p>
+                      <p className="pTextThingtodo">{data.country}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+          <li data-hp001 className="listToDo4">
+            <span style={{ cursor: "pointer" }}>Explore Klook</span>
+            <div data-hp001 className="conPopList list4">
+              <div className="conUl conExplore">
+                <div className="easeConExplore lineEase">
+                  <div className="headExplore"><Image src="/TTD.webp" width={24} height={24} alt="TTD" style={{ marginRight: "0.5rem" }} />Things to do</div>
+                  <div className="listTTD">
+                    <Link href="/">Tour & experiences</Link>
+                    <Link href="/">Day trips</Link>
+                    <Link href="/">Massages & spa</Link>
+                    <Link href="/">Outdoor activities</Link>
+                    <Link href="/">Cultural experiences</Link>
+                    <Link href="/">Water sports</Link>
+                    <Link href="/">Cruises</Link>
+                    <Link href="/">Attraction tickets</Link>
+                  </div>
+                </div>
+                <div className="easeConExplore lineEase">
+                  <div className="headExplore"><Image src="/Hotel.webp" width={24} height={24} alt="Hotel" style={{ marginRight: "0.5rem" }} />Accommodation</div>
+                  <div className="listTTD">
+                    <Link href="/">Hotels</Link>
+                  </div>
+                </div>
+                <div className="easeConExplore lineEase">
+                  <div className="headExplore"><Image src="/Transport.webp" width={24} height={24} alt="Transport" style={{ marginRight: "0.5rem" }} />Transport options</div>
+                  <div className="listTTD">
+                    <Link href="/">Airport transfers</Link>
+                    <Link href="/">Car rentals</Link>
+                    <Link href="/">Europe train tickets</Link>
+                    <Link href="/">HK High Speed Rail</Link>
+                    <Link href="/">Japan train tickets</Link>
+                    <Link href="/">Shinkansen tickets</Link>
+                    <Link href="/">Korea bus</Link>
+                  </div>
+                </div>
+                <div className="easeConExplore">
+                  <div className="headExplore"><Image src="/Wifi.webp" width={24} height={24} alt="Wifi" style={{ marginRight: "0.5rem" }} />Travel essentials</div>
+                  <div className="listTTD">
+                    <Link href="/">Insurance</Link>
+                    <Link href="/">WiFi & SIM cards</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>|
+          <li data-hp002><Image src="/category_36_gift_card.png" alt="image" width={24} height={24} style={{ paddingRight: "0.3rem" }} /> Gift cards</li>
+        </ul>
+      </div>
+      <div className="conBanner">
+        <div className="gradiant-card left">
+          <span className="prevnext prev"><i className="fa-solid fa-angle-left"></i></span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="gradiant-card right">
+          <span className="prevnext next"><i className="fa-solid fa-angle-right"></i></span>
+        </div>
+        <div className="ddesdw">
+          <h2>Your world of joy</h2>
+          <p>From local escapes to far-flung adventures, find what makes you happy anytime, anywhere</p>
+          <div className="conSearchBanner">
+            <label className="iconSearch2" htmlFor="searchInput"><i className="fas fa-search"></i></label>
+            <input className="inputSearch" id="searchInput" placeholder={randomLandmark || "Search attractions..."} onInput={openBannerModalSearch} onClick={openBannerModalSearch} />
+            <button className="btn-search">Search</button>
+          </div>
+        </div>
+        <div className="bg_close" onClick={closeBannerSearch} style={{ display: `${isOpenModalBannerSearch ? "block" : "none"}` }} />
+        <div className={`conSearchList ${isOpenModalBannerSearch ? "conSearchList2" : ""}`}>
+          <div>
+            <h3 style={{ color: "black" }}>Search history</h3>
+            <div style={{ color: "black" }}>detail search history</div>
+          </div>
+          <div>
+            <h3 style={{ color: "black" }}>Other travelers searched for</h3>
+            <div className="conRandomSearchCity">
+              {randomCities.map((data, index) => (
+                <div key={index} className="randomSearch">{data.city}</div>
+              ))}
+            </div>
+          </div>
+          <div className="conTopandTrendList">
+            <div className="conSearchTopTrend">
+              <div className="bgColorTopTreandSearch" />
+              <h4>Top searches</h4>
+              {topSearchProducts.map((data) => {
+
+                const convertedPrice = formatter.format(data.price * convertRate);
+
+                return (
+                  <li key={data.id} className="conLi">
+                    <span className={`num ${data.id > 3 ? "num4" : ""}`}>{data.id}</span>
+                    <Link href={`/city/${data.city}`} className="linkTrendingSearch">
+                      <Image
+                        width={60}
+                        height={60}
+                        alt={data.city}
+                        src={`/${data.image}`}
+                        className="imgTrending"
+                      />
+                      <div style={{ display: "flex", flexDirection: "column", paddingTop: "0.7rem" }}>
+                        <p style={{ padding: 0, margin: 0, flexWrap: "wrap", fontSize: "14px" }}>
+                          {data.name} : {data.description}
+                        </p>
+                        <div className="pTrending pTopSearch">
+                          <p>{data.city}</p>
+                          <p style={{ color: "#ff6600", marginRight: "1rem" }}>
+                            From
+                            <span style={{ fontWeight: "600", paddingLeft: "5px" }}>{convertedPrice}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
+            </div>
+            <div className="conSearchTopTrend">
+              <div className="bgColorTopTreandSearch"></div>
+              <h4>Trending destinations</h4>
+              {trendingCities.map((data, index) => (
+                <li key={data.id} className="conLi">
+                  <span className={`num ${index + 1 > 3 ? "num4" : ""}`}>{index + 1}</span>
+                  <Link href={`/city/${data.city}`} className="linkTrendingSearch">
+                    <Image width={60} height={60} alt={data.city} src={`/${data.image}`} className="imgTrending" />
+                    <div >
+                      <p style={{ padding: "0", margin: "0" }}>{data.city}</p>
+                      <p className="pTrending">
+                        {data.type[1]} {data.type[2]} | {data.highlights} | {data.country}
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="banner-hp banner1" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1744887188/banner/lcbfm8zwaj81ehnqfgjl.jpg)" }} />
+        <div className="banner-hp banner2" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1670577664/banner/rtw7fgqatgoc1vpcpamb.webp)" }} />
+        <div className="banner-hp banner3" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1670577678/banner/tvhfgpkiapfldzoaj8ll.webp)" }} />
+      </div>
+    </>
   );
 }

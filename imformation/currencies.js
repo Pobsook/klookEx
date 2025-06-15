@@ -1,0 +1,32 @@
+const currencies = [
+  { id: 1, name: "Baht", initials: "THB" },
+  { id: 2, name: "Euro", initials: "EUR" },
+  { id: 3, name: "Japanese Yen", initials: "JPY" },
+  { id: 4, name: "British Pound", initials: "GBP" },
+  { id: 5, name: "Swiss Franc", initials: "CHF" },
+  { id: 6, name: "Canadian Dollar", initials: "CAD" },
+  { id: 7, name: "Australian Dollar", initials: "AUD" },
+  { id: 8, name: "Singapore Dollar", initials: "SGD" },
+  { id: 9, name: "New Zealand Dollar", initials: "NZD" },
+  { id: 10, name: "Chinese Yuan", initials: "CNY" },
+  { id: 11, name: "Hong Kong Dollar", initials: "HKD" },
+  { id: 12, name: "South Korean Won", initials: "KRW" },
+  { id: 13, name: "Indian Rupee", initials: "INR" },
+  { id: 14, name: "Malaysian Ringgit", initials: "MYR" },
+  { id: 15, name: "Philippine Peso", initials: "PHP" },
+  { id: 16, name: "Indonesian Rupiah", initials: "IDR" },
+  { id: 17, name: "Brazilian Real", initials: "BRL" },
+  { id: 18, name: "Mexican Peso", initials: "MXN" },
+  { id: 19, name: "South African Rand", initials: "ZAR" },
+  { id: 20, name: "Swedish Krona", initials: "SEK" },
+  { id: 21, name: "Norwegian Krone", initials: "NOK" },
+  { id: 22, name: "Danish Krone", initials: "DKK" },
+  { id: 23, name: "Polish Zloty", initials: "PLN" },
+  { id: 24, name: "Turkish Lira", initials: "TRY" },
+  { id: 25, name: "Israeli Shekel", initials: "ILS" },
+  { id: 26, name: "Czech Koruna", initials: "CZK" },
+  { id: 27, name: "Hungarian Forint", initials: "HUF" },
+  { id: 28, name: "United States Dollar", initials: "USD" }
+]
+
+export default currencies

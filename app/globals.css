@@ -1,26 +1,352 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+nav {
+  z-index: 4;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 3.7rem;
+  max-height: 3.7rem;
+  border-bottom: 1px solid #e2e2e2;
+  position: fixed;
+  background-color: white;
+}
+
+.navTopLeft {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.navSearchBar {
+  width: 17rem;
+  height: 2.3rem;
+  padding-inline: 1rem;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  border: 1.5px solid #f0f0f0;
+}
+
+.navSearchBar::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
+.navSearchBar:hover,
+.navSearchBar:focus {
+  background-color: white;
+  border: 1px solid #ff6600;
+  outline: none;
+}
+
+.navSearchBar:focus~.conSearchList,
+.conSearchList:hover {
+  display: flex;
+}
+
+.navSearchBar:not(:placeholder-shown)~.iconSearch {
+  color: #ff6600;
+}
+
+.conSearch {
+  position: relative;
+}
+
+.iconSearch {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  right: 0.7rem;
+  transform: translateY(-50%);
+  font-size: larger;
+  cursor: pointer;
+}
+
+.navTopRight {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.listNav,
+.login,
+.randomSearch {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+  color: #333333;
+  padding: 8px 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.listNav{
+  font-size: 15px;
+}
+
+.randomSearch {
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.login {
+  background-color: #ff6600;
+  color: #f0f0f0;
+}
+
+.conRandomSearchCity {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.listNav span {
+  font-size: 10px;
+}
+
+.listNav:hover {
+  background-color: #f0f0f0;
+}
+
+.randomSearch:hover {
+  background-color: #dfdfdf;
+}
+
+.conSearchList {
+  z-index: 6;
+  display: none;
+  width: 46rem;
+  height: 33rem;
+  position: absolute;
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  background-color: white;
+  outline: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.11);
+  flex-direction: column;
+  padding: 0.5rem 1.5rem;
+  overflow-y: scroll;
+}
+
+.conSearchList2{
+  display: block;
+  top: 21rem;
+  left: 12rem;
+}
+
+.conTopandTrendList {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.conSearchTopTrend {
+  width: 50%;
+  border: 1px solid #f0f0f0;
+  border-radius: 15px;
+  padding-inline: 1rem;
+  overflow: hidden;
+  position: relative;
+  color: black;
+}
+
+.bgColorTopTreandSearch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  background: linear-gradient(180deg, #ff88001c, #ff880000);
+}
+
+.linkTrendingSearch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  max-block-size: 4rem;
+}
+
+.imgTrending {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 0, 0, 0.411);
+}
+
+.pTrending,
+.pTopSearch {
+  padding: 0;
+  margin: 0.5 0rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #646464;
+  font-size: 14px;
+
+}
+
+.pTopSearch {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.conLi {
+  position: relative;
+  height: 3.9rem;
+  list-style: none;
+  margin-bottom: 1rem;
+  max-block-size: 3.9rem;
+}
+
+.num {
+  position: absolute;
+  background-color: #ff6600;
+  border-radius: 10px 0px 0px 0px;
+  padding: 2px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  max-block-size: 0.8rem;
+  max-inline-size: 0.8rem;
+}
+
+.num4 {
+  background-color: #00000083;
+}
+
+.logo-en-fill {
+  fill: #ff5b00;
+}
+
+.conCurrentcies, .conLanguage {
+  z-index: 6;
+  position: fixed;
+  width: 46rem;
+  flex-direction: column;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-40%);
+  border-radius: 10px;
+  background-color: white;
+  outline: none;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.11);
+  padding: 0.5rem 0.5rem;
+}
+
+.easeCurrent {
+  padding: 0.5rem 0.5rem;
+  padding-left: 0.7rem;
+  width: 22%;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.easeCurrent:hover {
+  background-color: #ebebeb;
+}
+
+.selectedCurrent{
+  color: #ff6600;
+}
+
+.listCurrency {
+  display: flex;
+  width: 100%;
+  row-gap: 0.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bg_close {
+  z-index: 5;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.list[data-v-6d6f7446] {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+a[data-v-6d6f7446], .chLanDiv, li[data-v-6d6f7499] {
+  -webkit-box-align: center;
+  align-items: center;
+  color: #212121;
+  display: flex;
+  font-size: 16px;
+  height: 28px;
+  padding: 0 5px;
+  width: 210px;
+  text-decoration: none;
+}
+
+.list .subitem[data-v-6d6f7446] {
+  background-color: #fff;
+  border-radius: 6px;
+  color: #212121;
+  display: none;
+  left: calc(100% - 10px);
+  margin-left: 12px;
+  margin-top: -21px;
+  padding: 6px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.list li[data-v-6d6f7446] {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: 28px;
+  margin-bottom: 4px;
+  min-width: 210px;
+  width: 33%;
+}
+
+.chLan:hover .subitem{
+  position: fixed;
+  display: flex;
+  max-inline-size: 10rem;
+  left: 6rem;
+  align-items: center;
+}
+
+.list .subitem[data-v-6d6f7446], .list .subitem[data-v-6d6f7446]:before {
+    -webkit-box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, .2);
+    top: 60%;
+}
+
+span[data-v-6d6f7446]{
+  padding-left: 0.5rem;
+  font-size: 14px;
+}
+
+.list li:hover a[data-v-6d6f7446], .list li:hover .chLanDiv{
+  background-color: #f0f0f0;
+}
+
+.subitem li:hover{
+  color: #ff6600;
+  cursor: pointer;
+}
+
+.selectedLang[data-v-6d6f7446]{
+  color: #ff6600;
+}
+
