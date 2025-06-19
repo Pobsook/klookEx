@@ -5,7 +5,8 @@ const travelProducts = [
     description: "ซิมอินเทอร์เน็ตไม่จำกัดสำหรับยุโรป 15 วัน",
     price: 35,
     image: "ExPic.JPG",
-    city: "Europe"
+    city: "Europe",
+    searchVolume: 4200
   },
   {
     id: 2,
@@ -13,7 +14,8 @@ const travelProducts = [
     description: "ซิมดาต้า 7 วัน สำหรับการเดินทางในญี่ปุ่น",
     price: 22,
     image: "ExPic.JPG",
-    city: "Japan"
+    city: "Japan",
+    searchVolume: 6300
   },
   {
     id: 3,
@@ -21,7 +23,8 @@ const travelProducts = [
     description: "เต็นท์น้ำหนักเบาสำหรับ 2 คน เหมาะสำหรับแคมป์ปิ้ง",
     price: 65,
     image: "ExPic.JPG",
-    city: "Canada"
+    city: "Canada",
+    searchVolume: 2100
   },
   {
     id: 4,
@@ -29,7 +32,8 @@ const travelProducts = [
     description: "ที่พักใจกลางกรุงเทพ เริ่มต้นคืนละ",
     price: 12,
     image: "ExPic.JPG",
-    city: "Bangkok"
+    city: "Bangkok",
+    searchVolume: 7100
   },
   {
     id: 5,
@@ -37,7 +41,8 @@ const travelProducts = [
     description: "ตั๋วเดินทางทั่วสวิตเซอร์แลนด์ 3 วันไม่จำกัด",
     price: 240,
     image: "ExPic.JPG",
-    city: "Switzerland"
+    city: "Switzerland",
+    searchVolume: 3900
   },
   {
     id: 6,
@@ -45,7 +50,8 @@ const travelProducts = [
     description: "กระเป๋าเป้เดินทางขนาด 40L กันน้ำ",
     price: 39,
     image: "ExPic.JPG",
-    city: "New Zealand"
+    city: "New Zealand",
+    searchVolume: 1700
   },
   {
     id: 7,
@@ -53,7 +59,8 @@ const travelProducts = [
     description: "แพ็กเกจทัวร์ชมพระอาทิตย์ตกพร้อมอาหารค่ำ",
     price: 55,
     image: "ExPic.JPG",
-    city: "Bali"
+    city: "Bali",
+    searchVolume: 5600
   },
   {
     id: 8,
@@ -61,7 +68,8 @@ const travelProducts = [
     description: "เตาแก๊สแบบพกพา สำหรับแคมป์ปิ้ง",
     price: 28,
     image: "ExPic.JPG",
-    city: "Norway"
+    city: "Norway",
+    searchVolume: 1300
   },
   {
     id: 9,
@@ -69,7 +77,8 @@ const travelProducts = [
     description: "ซาฟารีทะเลทรายพร้อมดินเนอร์และโชว์",
     price: 70,
     image: "ExPic.JPG",
-    city: "Dubai"
+    city: "Dubai",
+    searchVolume: 4400
   },
   {
     id: 10,
@@ -77,7 +86,8 @@ const travelProducts = [
     description: "บัตรเข้าชมสถานที่สำคัญในลอนดอนได้ถึง 5 แห่ง",
     price: 89,
     image: "ExPic.JPG",
-    city: "London"
+    city: "London",
+    searchVolume: 3900
   },
   {
     id: 11,
@@ -85,7 +95,8 @@ const travelProducts = [
     description: "บัตรเข้าสวนสนุกยูนิเวอร์แซล 1 วัน",
     price: 78,
     image: "ExPic.JPG",
-    city: "Osaka"
+    city: "Osaka",
+    searchVolume: 4800
   },
   {
     id: 12,
@@ -93,7 +104,8 @@ const travelProducts = [
     description: "เสื้อกันหนาวสำหรับกิจกรรมหิมะ",
     price: 59,
     image: "ExPic.JPG",
-    city: "Sweden"
+    city: "Sweden",
+    searchVolume: 2400
   },
   {
     id: 13,
@@ -101,7 +113,8 @@ const travelProducts = [
     description: "ล่องเรือค้างคืนในอ่าวฮาลอง ประเทศเวียดนาม",
     price: 130,
     image: "ExPic.JPG",
-    city: "Halong Bay"
+    city: "Halong Bay",
+    searchVolume: 3500
   },
   {
     id: 14,
@@ -109,7 +122,8 @@ const travelProducts = [
     description: "รถรับส่งสนามบินแบบส่วนตัว",
     price: 25,
     image: "ExPic.JPG",
-    city: "Singapore"
+    city: "Singapore",
+    searchVolume: 5900
   },
   {
     id: 15,
@@ -117,7 +131,8 @@ const travelProducts = [
     description: "ทัวร์หมู่เกาะพีพีแบบเต็มวัน พร้อมเรือสปีดโบ๊ท",
     price: 48,
     image: "ExPic.JPG",
-    city: "Krabi"
+    city: "Krabi",
+    searchVolume: 3300
   },
   {
     id: 16,
@@ -125,7 +140,8 @@ const travelProducts = [
     description: "ประกันเดินทางแบบครอบคลุมทั่วโลก 14 วัน",
     price: 19,
     image: "ExPic.JPG",
-    city: "Global"
+    city: "Global",
+    searchVolume: 2700
   },
   {
     id: 17,
@@ -133,7 +149,8 @@ const travelProducts = [
     description: "เดินชมและชิมอาหารกลางคืนในไทเป",
     price: 38,
     image: "ExPic.JPG",
-    city: "Taipei"
+    city: "Taipei",
+    searchVolume: 3100
   },
   {
     id: 18,
@@ -141,7 +158,8 @@ const travelProducts = [
     description: "หมอนรองคอสำหรับการเดินทางไกล",
     price: 18,
     image: "ExPic.JPG",
-    city: "Global"
+    city: "Global",
+    searchVolume: 1800
   },
   {
     id: 19,
@@ -149,7 +167,8 @@ const travelProducts = [
     description: "ทริปเที่ยวภูเขาฟูจิจากโตเกียว",
     price: 64,
     image: "ExPic.JPG",
-    city: "Tokyo"
+    city: "Tokyo",
+    searchVolume: 6100
   },
   {
     id: 20,
@@ -157,7 +176,8 @@ const travelProducts = [
     description: "ถุงมือกันหนาวสำหรับเล่นหิมะหรือสกี",
     price: 15,
     image: "ExPic.JPG",
-    city: "Russia"
+    city: "Russia",
+    searchVolume: 2200
   }
 ];
 

@@ -7,11 +7,19 @@ import "./homepageStyle.css";
 import touristCities from "@/imformation/touristCities";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import travelProducts from "@/imformation/topSearch";
-import useExchangeRates from "@/api/api_exchangerate";
 import { useCurrency } from "@/context/CurrencyContext";
+import SearchModule from "@/component/searchModule";
+import { useRouter } from 'next/navigation';
+import Searching from "@/component/Searching";
 
 export default function Home() {
+  const routerSearchText = useRouter();
+
+  const [searchText, setSearchText] = useState("");
+  const searchFunc = () => {
+    routerSearchText.push(`?newSearch=${searchText}`);
+    setIsOpenModalBannerSearch(true);
+  }
 
   const { currency } = useCurrency();
 
@@ -41,7 +49,7 @@ export default function Home() {
         // ใส่ชื่อสถานที่ท่องเที่ยวลงใน placeholder
         setRandomLandmark(attraction);
       }
-    }, 3000);
+    }, 5000);
 
     // เรียกทันทีตอนเริ่ม
     const init = () => {
@@ -65,37 +73,6 @@ export default function Home() {
   const closeBannerSearch = () => {
     setIsOpenModalBannerSearch(false)
   }
-
-  const rates = useExchangeRates();
-  const convertRate = rates?.[currency] ?? 1;
-
-  const trendingCities = touristCities
-    .sort((a, b) => b.searchVolume - a.searchVolume)
-    .slice(0, 10);
-
-  const nonTrendingCities = touristCities
-    .sort((a, b) => b.searchVolume - a.searchVolume)
-    .slice(10); // ตัด top 10 ออก
-
-  function getRandomItems(array, count) {
-    const shuffled = [...array].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, count);
-  }
-
-  const [randomCities, setRandomCities] = useState([]);
-
-  useEffect(() => {
-    setRandomCities(getRandomItems(nonTrendingCities, 10));
-  }, []);
-
-  const topSearchProducts = travelProducts
-    .slice(0, 10);
-
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: currency || "USD", // ✅ ใส่ fallback
-    maximumFractionDigits: 2,
-  });
 
   return (
     <>
@@ -209,79 +186,13 @@ export default function Home() {
           <p>From local escapes to far-flung adventures, find what makes you happy anytime, anywhere</p>
           <div className="conSearchBanner">
             <label className="iconSearch2" htmlFor="searchInput"><i className="fas fa-search"></i></label>
-            <input className="inputSearch" id="searchInput" placeholder={randomLandmark || "Search attractions..."} onInput={openBannerModalSearch} onClick={openBannerModalSearch} />
-            <button className="btn-search">Search</button>
+            <input className="inputSearch" id="searchInput" placeholder={randomLandmark || "Search attractions..."} onInput={openBannerModalSearch} onClick={openBannerModalSearch} onChange={(e) => setSearchText(e.target.value)} />
+            <button className="btn-search" onClick={searchFunc}>Search</button>
           </div>
         </div>
         <div className="bg_close" onClick={closeBannerSearch} style={{ display: `${isOpenModalBannerSearch ? "block" : "none"}` }} />
         <div className={`conSearchList ${isOpenModalBannerSearch ? "conSearchList2" : ""}`}>
-          <div>
-            <h3 style={{ color: "black" }}>Search history</h3>
-            <div style={{ color: "black" }}>detail search history</div>
-          </div>
-          <div>
-            <h3 style={{ color: "black" }}>Other travelers searched for</h3>
-            <div className="conRandomSearchCity">
-              {randomCities.map((data, index) => (
-                <div key={index} className="randomSearch">{data.city}</div>
-              ))}
-            </div>
-          </div>
-          <div className="conTopandTrendList">
-            <div className="conSearchTopTrend">
-              <div className="bgColorTopTreandSearch" />
-              <h4>Top searches</h4>
-              {topSearchProducts.map((data) => {
-
-                const convertedPrice = formatter.format(data.price * convertRate);
-
-                return (
-                  <li key={data.id} className="conLi">
-                    <span className={`num ${data.id > 3 ? "num4" : ""}`}>{data.id}</span>
-                    <Link href={`/city/${data.city}`} className="linkTrendingSearch">
-                      <Image
-                        width={60}
-                        height={60}
-                        alt={data.city}
-                        src={`/${data.image}`}
-                        className="imgTrending"
-                      />
-                      <div style={{ display: "flex", flexDirection: "column", paddingTop: "0.7rem" }}>
-                        <p style={{ padding: 0, margin: 0, flexWrap: "wrap", fontSize: "14px" }}>
-                          {data.name} : {data.description}
-                        </p>
-                        <div className="pTrending pTopSearch">
-                          <p>{data.city}</p>
-                          <p style={{ color: "#ff6600", marginRight: "1rem" }}>
-                            From
-                            <span style={{ fontWeight: "600", paddingLeft: "5px" }}>{convertedPrice}</span>
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </div>
-            <div className="conSearchTopTrend">
-              <div className="bgColorTopTreandSearch"></div>
-              <h4>Trending destinations</h4>
-              {trendingCities.map((data, index) => (
-                <li key={data.id} className="conLi">
-                  <span className={`num ${index + 1 > 3 ? "num4" : ""}`}>{index + 1}</span>
-                  <Link href={`/city/${data.city}`} className="linkTrendingSearch">
-                    <Image width={60} height={60} alt={data.city} src={`/${data.image}`} className="imgTrending" />
-                    <div >
-                      <p style={{ padding: "0", margin: "0" }}>{data.city}</p>
-                      <p className="pTrending">
-                        {data.type[1]} {data.type[2]} | {data.highlights} | {data.country}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </div>
-          </div>
+          {searchText ? <Searching keyword={searchText} /> : <SearchModule/>}
         </div>
         <div className="banner-hp banner1" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1744887188/banner/lcbfm8zwaj81ehnqfgjl.jpg)" }} />
         <div className="banner-hp banner2" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1670577664/banner/rtw7fgqatgoc1vpcpamb.webp)" }} />
