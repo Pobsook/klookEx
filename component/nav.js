@@ -23,6 +23,11 @@ export default function Nav() {
     setOpenModalSearch(true);
   }
 
+  const searchFunc2 = (clickSearch) => {
+    routerSearchText.push(`?newSearch=${clickSearch}`);
+    setOpenModalSearch(true);
+  }
+
   const { currency } = useCurrency();
 
   const router = useRouter()

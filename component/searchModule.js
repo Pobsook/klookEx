@@ -16,6 +16,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 export default function SearchModule() {
 
     const router = useRouter();
+    const routerSearchText = useRouter();
+
+    const searchFunc2 = (clickSearch) => {
+        routerSearchText.push(`?newSearch=${clickSearch}`);
+        setOpenModalSearch(true);
+    }
 
     const [allSearchText, setAllSearchText] = useState([]);  // 🔹 สร้าง state เพื่อเก็บคำค้นหาทั้งหมด (search history)
     const searchParams = useSearchParams();                  // 🔹 ใช้เพื่ออ่าน query parameter จาก URL เช่น ?newSearch=bangkok
@@ -82,7 +88,7 @@ export default function SearchModule() {
                     <h3>Search history</h3>
                     <div className="conRandomSearchCity">
                         {allSearchText.map((data, index) => (
-                            <div key={index} className="randomSearch">{data}</div>
+                            <Link key={index} className="randomSearch" href={`/search/${data}`}>{data}</Link>
                         ))}
                     </div>
                 </>
@@ -93,7 +99,9 @@ export default function SearchModule() {
                 <h3>Other travelers searched for</h3>
                 <div className="conRandomSearchCity">
                     {randomCities.map((data, index) => (
-                        <div key={index} className="randomSearch">{data.city}</div>
+                        <Link key={index} onClick={() => searchFunc2(data.city)} href={`/search/${data.city}`} className="randomSearch" >
+                            {data.city}
+                        </Link>
                     ))}
                 </div>
             </div>
@@ -114,7 +122,7 @@ export default function SearchModule() {
                         return (
                             <li key={index + 1} className="conLi">
                                 <span className={`num ${index + 1 > 3 ? "num4" : ""}`}>{index + 1}</span>
-                                <Link href={`@/app/city/${data.city}`} className="linkTrendingSearch">
+                                <Link href={`/activity/${data.name}`} className="linkTrendingSearch" >
                                     <Image
                                         width={60}
                                         height={60}
