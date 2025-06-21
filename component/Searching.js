@@ -63,11 +63,9 @@ export default function Searching({ keyword }) {                           // à¸
     return (
         <div>
             {results.map((result, index) => (
-                <div key={index} onClick={() => searchFunc2(result)}>
-                    <Link href={`/search/${result}`} style={{ display: 'block' }}>
-                        {highlightKeyword(result, keyword)}
-                    </Link>
-                </div>
+                <Link key={index} onClick={() => searchFunc2(result)} href={`/search/${result}`} style={{ display: 'block' }}>
+                    {highlightKeyword(result, keyword)}
+                </Link>
             ))}
         </div>
     );

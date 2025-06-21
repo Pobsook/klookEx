@@ -1,8 +1,9 @@
-.conMainHomePage[data-hp001]{
+.conMainHomePage[data-hp001] {
     display: flex;
+    position: relative;
 }
 
-.listToDo[data-hp001]{
+.listToDo[data-hp001] {
     position: fixed;
     z-index: 2;
     display: flex;
@@ -16,7 +17,8 @@
     background-color: white;
 }
 
-li[data-hp001], li[data-hp002]{
+li[data-hp001],
+li[data-hp002] {
     list-style: none;
     max-height: 3.7rem;
     padding: 1.2rem 1rem;
@@ -24,7 +26,7 @@ li[data-hp001], li[data-hp002]{
     border-bottom: 2px solid white;
 }
 
-li[data-hp002]{
+li[data-hp002] {
     border-radius: 30px;
     padding: 0.6rem 0.5rem;
     margin: 0.6rem 0.5rem;
@@ -32,11 +34,11 @@ li[data-hp002]{
     align-items: center;
 }
 
-li[data-hp002]:hover{
+li[data-hp002]:hover {
     background-color: #f0f0f0;
 }
 
-.conPopList[data-hp001]{
+.conPopList[data-hp001] {
     position: fixed;
     visibility: hidden;
     opacity: 0;
@@ -50,7 +52,7 @@ li[data-hp002]:hover{
     background-color: white;
 }
 
-.easeListTodo[data-hp003]{
+.easeListTodo[data-hp003] {
     list-style: none;
     display: flex;
     align-items: center;
@@ -64,12 +66,12 @@ li[data-hp002]:hover{
     height: 4rem;
 }
 
-.imgListTodo{
+.imgListTodo {
     border-radius: 50%;
     border: 1px solid rgb(255, 47, 47);
 }
 
-.conUl{
+.conUl {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
@@ -78,51 +80,53 @@ li[data-hp002]:hover{
     max-block-size: 21.5rem;
 }
 
-.conOver{
+.conOver {
     overflow-y: scroll;
 }
 
-.conExplore{
+.conExplore {
     max-block-size: 30rem;
 }
 
-.easeListTodo[data-hp003]:hover{
+.easeListTodo[data-hp003]:hover {
     background-color: #f3f3f3;
 }
 
-.pTextThingtodo{
+.pTextThingtodo {
     color: #b3b3b3;
     font-size: 13px;
     padding: 0;
     margin: 0;
 }
 
-.pListThingTodo{
+.pListThingTodo {
     padding: 0;
     margin: 0;
 }
 
-.list1, .list2, .list3{
-    transition: 0.3s;
-}
-
-.listToDo1, .listToDo2, .listToDo3, .listToDo4{
+.listToDo1,
+.listToDo2,
+.listToDo3,
+.listToDo4 {
     transition: border-bottom 0.3s;
 }
 
-.listToDo1:hover .list1, 
-.listToDo2:hover .list2,  
+.listToDo1:hover .list1,
+.listToDo2:hover .list2,
 .listToDo3:hover .list3,
-.listToDo4:hover .list4{
+.listToDo4:hover .list4 {
     visibility: visible;
     opacity: 1;
 }
 
-.listToDo1:hover, .listToDo2:hover, .listToDo3:hover, .listToDo4:hover{
+.listToDo1:hover,
+.listToDo2:hover,
+.listToDo3:hover,
+.listToDo4:hover {
     border-bottom: 2px solid #ff6600;
 }
 
-.easeConExplore{
+.easeConExplore {
     display: flex;
     flex-direction: column;
     width: 22%;
@@ -130,23 +134,23 @@ li[data-hp002]:hover{
     margin-block: 1.5rem;
 }
 
-.lineEase{
+.lineEase {
     border-right: 1px solid #f0f0f0;
 }
 
-.listTTD{
+.listTTD {
     display: flex;
     flex-direction: column;
 }
 
-.listTTD a{
+.listTTD a {
     text-decoration: none;
     color: black;
     padding: 0.6rem 0.5rem;
     border-radius: 10px;
 }
 
-.headExplore{
+.headExplore {
     margin: 0.5rem;
     font-size: 16px;
     font-weight: 700;
@@ -154,11 +158,11 @@ li[data-hp002]:hover{
     align-items: center;
 }
 
-.listTTD a:hover{
+.listTTD a:hover {
     background-color: #f3f3f3;
 }
 
-.conBanner{
+.conBanner {
     position: relative;
     margin-top: 7.4rem;
     width: 100%;
@@ -166,18 +170,24 @@ li[data-hp002]:hover{
     color: white;
 }
 
-.banner-hp{
-    display: none;
+.slider-wrapper {
+    position: relative;
     width: 100%;
     height: 30rem;
-    background-repeat: repeat;
-    background-size: cover;
-    z-index: -2;
+    overflow: hidden;
 }
 
-.banner3{
-    position: absolute;
+.slider-track {
     display: flex;
+    height: 30rem;
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    height: 30rem;
+    background-position: center;
+    background-size: cover;
 }
 
 .gradiant-card {
@@ -198,24 +208,23 @@ li[data-hp002]:hover{
 }
 
 
-.prevnext{
+.prevnext {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 50px;
     cursor: pointer;
 }
 
-.prev{
-    right: 2rem;
-}
-.next{
-    left: 2rem;
+.prevbanner, .nextbanner {
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
 }
 
-.ddesdw{
+.ddesdw {
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     margin-left: 12rem;
     margin-top: 9rem;
     display: flex;
@@ -223,25 +232,26 @@ li[data-hp002]:hover{
     gap: 0.5rem;
 }
 
-.ddesdw h2{
+.ddesdw h2 {
     font-size: 70px;
     padding: 0;
     margin: 0;
 }
 
-.ddesdw p{
+.ddesdw p {
     font-size: 25px;
     padding: 0;
     margin: 0;
 }
 
-.conSearchBanner{
+.conSearchBanner {
     margin-top: 0.7rem;
     position: relative;
     z-index: 20;
 }
 
-.inputSearch{
+.inputSearch {
+    position: absolute;
     padding-left: 3rem;
     height: 3rem;
     width: 46rem;
@@ -249,22 +259,24 @@ li[data-hp002]:hover{
     outline-style: none;
     font-size: 20px;
     border-style: none;
+    z-index: 19;
 }
 
-.iconSearch2{
+.iconSearch2 {
     position: absolute;
-    top: 50%;
+    top: 1.57rem;
     transform: translateY(-50%);
     left: 0.9rem;
     color: #b8b8b8;
     font-size: 20px;
+    z-index: 20;
 }
 
-.btn-search{
+.btn-search {
     position: absolute;
-    z-index: 25;
+    z-index: 20;
     right: 8rem;
-    top: 50%;
+    top: 1.57rem;
     transform: translateY(-50%);
     color: white;
     font-size: 16px;
@@ -275,4 +287,52 @@ li[data-hp002]:hover{
     cursor: pointer;
     outline-style: none;
     border-style: none;
+    text-decoration: none;
 }
+
+.image-box {
+    min-width: 23.5rem;
+    width: 23.5rem;
+    height: 10rem;
+    border-radius: 10px;
+}
+
+.conAllHomepage {
+    padding-inline: 11rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.conAllHomepage h2{
+    margin: 4rem 0 2rem 0;
+    font-size: 32px;
+}
+
+.conHomepage001{
+    position: relative;
+}
+
+.header-wraper001 {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.prevnext2{
+    font-size: 16px;
+    border-radius: 50%;
+    border: 1.5px solid #e2e2e2;
+    padding: 0.5rem 0.75rem;
+}
+
+.prev{
+    left: -3rem;
+}
+.next{
+    right: -3rem;
+}
+
+.prevnext2:hover{
+    box-shadow: -4px 4px 10px #00000010;
+}
+

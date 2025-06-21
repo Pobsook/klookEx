@@ -16,15 +16,9 @@ import Searching from "./Searching"
 
 export default function Nav() {
 
-  const routerSearchText = useRouter();
   const [searchText, setSearchText] = useState("");
   const searchFunc = () => {
     routerSearchText.push(`?newSearch=${searchText}`);
-    setOpenModalSearch(true);
-  }
-
-  const searchFunc2 = (clickSearch) => {
-    routerSearchText.push(`?newSearch=${clickSearch}`);
     setOpenModalSearch(true);
   }
 
@@ -99,9 +93,9 @@ export default function Nav() {
         </Link>
         <div className="conSearch">
           <input type="search" onClick={openSearch} onChange={(e) => setSearchText(e.target.value)} className="navSearchBar" placeholder="Search destinations or activities" />
-          <label onClick={() => {searchFunc(); openSearch();}} className="iconSearch" >
+          <Link href={`/search/${searchText}`} onClick={() => {searchFunc(); openSearch();}} className="iconSearch" >
             <i className="fas fa-search"></i>
-          </label>
+          </Link>
           <div className="conSearchList" >
             {searchText ? <Searching keyword={searchText} /> : <SearchModule/>}
           </div>

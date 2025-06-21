@@ -6,7 +6,7 @@ import Image from "next/image";
 import "./homepageStyle.css";
 import touristCities from "@/imformation/touristCities";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useCurrency } from "@/context/CurrencyContext";
 import SearchModule from "@/component/searchModule";
 import { useRouter } from 'next/navigation';
@@ -73,6 +73,76 @@ export default function Home() {
   const closeBannerSearch = () => {
     setIsOpenModalBannerSearch(false)
   }
+
+  const images = [
+    "https://res.klook.com/image/upload/v1744887188/banner/lcbfm8zwaj81ehnqfgjl.jpg",
+    "https://res.klook.com/image/upload/v1670577664/banner/rtw7fgqatgoc1vpcpamb.webp",
+    "https://res.klook.com/image/upload/v1670577678/banner/tvhfgpkiapfldzoaj8ll.webp"
+  ];
+
+  const [index, setIndex] = useState(1) // เริ่มที่ index 1 เพราะมี clone ด้านหน้า
+  const [transition, setTransition] = useState(true)
+  const sliderRef = useRef()
+
+  const extendedImages = [images[images.length - 1], ...images, images[0]] // clone รูป
+
+  const nextSlide = () => {
+    setIndex(index + 1)
+  }
+
+  const prevSlide = () => {
+    setIndex(index - 1)
+  }
+
+  // สไลด์อัตโนมัติ
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 10000)
+    return () => clearInterval(timer)
+  }, [index])
+
+  // จัดการ jump เมื่อถึง clone
+  useEffect(() => {
+    if (index === images.length + 1) {
+      setTimeout(() => {
+        setTransition(false)
+        setIndex(1)
+      }, 600)
+    }
+    if (index === 0) {
+      setTimeout(() => {
+        setTransition(false)
+        setIndex(images.length)
+      }, 600)
+    } else {
+      setTransition(true)
+    }
+  }, [index])
+
+  const promotions = [
+    { href: "/Promotions/promotion1", image: "https://res.klook.com/image/upload/fl_lossy.progressive,w_800,h_342,c_fill,q_85/v1749431424/banner/n0sho0uocf0otnkjm7yx.webp" },
+    { href: "/Promotions/promotion2", image: "https://res.klook.com/image/upload/fl_lossy.progressive,w_800,h_342,c_fill,q_85/v1739719294/banner/yjh4rpaclt1rgo9h9lni.webp" },
+    { href: "/Promotions/promotion3", image: "/KlookPro.png" },
+    { href: "/Promotions/promotion4", image: "/KlookPro2.png" },
+    { href: "/Promotions/promotion5", image: "/KlookPro3.png" },
+    { href: "/Promotions/promotion6", image: "/KlookPro4.png" },
+    { href: "/Promotions/promotion7", image: "/KlookPro5.png" },
+  ];
+
+  const itemsPerPage = 3;
+  const totalPages = Math.ceil(promotions.length / itemsPerPage);
+
+  const [page, setPage] = useState(0); // ค่าระบุว่าอยู่ page ไหน
+
+  const nextPage = () => {
+    if (page < totalPages - 1) setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 0) setPage(page - 1);
+  };
+
+  const offset = page * itemsPerPage;
+  const visiblePromotions = promotions.slice(offset, offset + itemsPerPage);
 
   return (
     <>
@@ -175,28 +245,67 @@ export default function Home() {
         </ul>
       </div>
       <div className="conBanner">
-        <div className="gradiant-card left">
-          <span className="prevnext prev"><i className="fa-solid fa-angle-left"></i></span>
-        </div>
-        <div className="gradiant-card right">
-          <span className="prevnext next"><i className="fa-solid fa-angle-right"></i></span>
-        </div>
         <div className="ddesdw">
           <h2>Your world of joy</h2>
           <p>From local escapes to far-flung adventures, find what makes you happy anytime, anywhere</p>
           <div className="conSearchBanner">
             <label className="iconSearch2" htmlFor="searchInput"><i className="fas fa-search"></i></label>
             <input className="inputSearch" id="searchInput" placeholder={randomLandmark || "Search attractions..."} onInput={openBannerModalSearch} onClick={openBannerModalSearch} onChange={(e) => setSearchText(e.target.value)} />
-            <button className="btn-search" onClick={searchFunc}>Search</button>
+            <div className="bg_close" onClick={closeBannerSearch} style={{ display: `${isOpenModalBannerSearch ? "block" : "none"}` }} />
+            <Link href={`/search/${searchText}`} className="btn-search" onClick={searchFunc}>Search</Link>
           </div>
         </div>
-        <div className="bg_close" onClick={closeBannerSearch} style={{ display: `${isOpenModalBannerSearch ? "block" : "none"}` }} />
         <div className={`conSearchList ${isOpenModalBannerSearch ? "conSearchList2" : ""}`}>
-          {searchText ? <Searching keyword={searchText} /> : <SearchModule/>}
+          {searchText ? <Searching keyword={searchText} /> : <SearchModule />}
         </div>
-        <div className="banner-hp banner1" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1744887188/banner/lcbfm8zwaj81ehnqfgjl.jpg)" }} />
-        <div className="banner-hp banner2" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1670577664/banner/rtw7fgqatgoc1vpcpamb.webp)" }} />
-        <div className="banner-hp banner3" style={{ backgroundImage: "url(https://res.klook.com/image/upload/fl_lossy.progressive,q_90/c_fill,,w_2560,/v1670577678/banner/tvhfgpkiapfldzoaj8ll.webp)" }} />
+
+        <div className="slider-wrapper">
+          <div
+            ref={sliderRef}
+            className="slider-track"
+            style={{
+              transform: `translateX(-${index * 100}%)`,
+              transition: transition ? 'transform 0.6s ease-in-out' : 'none'
+            }}
+          >
+            {extendedImages.map((src, i) => (
+              <div key={i} className="slide" style={{ backgroundImage: `url(${src})` }} />
+            ))}
+          </div>
+          <div className="gradiant-card left">
+            <span className="prevnext prevbanner" onClick={prevSlide}>
+              <i className="fa-solid fa-angle-left"></i>
+            </span>
+          </div>
+          <div className="gradiant-card right">
+            <span className="prevnext nextbanner" onClick={nextSlide}>
+              <i className="fa-solid fa-angle-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="conAllHomepage">
+        <h2>Offers for you</h2>
+        <div className="conHomepage001">
+          <div className="header-wraper001">
+            {visiblePromotions.map((promo, idx) => (
+              <Link
+                key={idx}
+                href={promo.href}
+                className="image-box"
+                style={{
+                  backgroundImage: `url(${promo.image})`,
+                }}
+              />
+            ))}
+          </div>
+          <span className="prevnext prevnext2 prev" onClick={prevPage} disabled={page === 0} >
+            <i className="fa-solid fa-angle-left"></i>
+          </span>
+          <span className="prevnext prevnext2 next" onClick={nextPage} disabled={page === totalPages - 1} >
+            <i className="fa-solid fa-angle-right"></i>
+          </span>
+        </div>
       </div>
     </>
   );

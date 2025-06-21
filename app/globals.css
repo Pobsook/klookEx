@@ -67,6 +67,7 @@ nav {
   transform: translateY(-50%);
   font-size: larger;
   cursor: pointer;
+  color: black;
 }
 
 .navTopRight {
@@ -140,7 +141,7 @@ nav {
 .conSearchList2{
   z-index: 21;
   display: flex;
-  top: 21rem;
+  top: 20.7rem;
   left: 12rem;
 }
 

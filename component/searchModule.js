@@ -15,7 +15,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SearchModule() {
 
-    const router = useRouter();
     const routerSearchText = useRouter();
 
     const searchFunc2 = (clickSearch) => {
