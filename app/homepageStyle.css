@@ -284,7 +284,6 @@ li[data-hp002]:hover {
     background-color: #ff6600;
     padding: 0.8rem 2.95rem;
     border-radius: 8px;
-    cursor: pointer;
     outline-style: none;
     border-style: none;
     text-decoration: none;
@@ -295,6 +294,7 @@ li[data-hp002]:hover {
     width: 23.5rem;
     height: 10rem;
     border-radius: 10px;
+    transition: 0.3s;
 }
 
 .conAllHomepage {
@@ -308,14 +308,10 @@ li[data-hp002]:hover {
     font-size: 32px;
 }
 
-.conHomepage001{
-    position: relative;
-}
-
 .header-wraper001 {
     display: flex;
     justify-content: space-between;
-    overflow-x: hidden;
+    gap: 1.17rem;
 }
 
 .prevnext2{
@@ -336,3 +332,88 @@ li[data-hp002]:hover {
     box-shadow: -4px 4px 10px #00000010;
 }
 
+.conHomepage{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem
+}
+
+.easeCon002{
+    width: 25%;
+}
+
+.easeCon003{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 23rem;
+    border-radius: 10px;
+    border: 1px solid red;
+    transition: 0.3s;
+}
+
+.easeCon003-1, .easeCon003-2{
+    height: 50%;
+    border: 1px solid green;
+}
+
+.btn-003{
+    margin: auto;
+    margin-top: 2rem;
+    height: 2.2rem;
+    width: 20rem;
+    border-radius: 10px;
+    outline-style: none;
+    background-color: white;
+    border: 1px solid #212121;
+    cursor: pointer;
+    font-weight: 700;
+    color: #212121;
+}
+
+.easeCon004{
+    padding: 1.5rem;
+    width: 33%;
+    height: 21rem;
+    border-radius: 10px;
+    border: 1px solid red;
+    transition: 0.3s;
+}
+
+.easeCon004 h3{
+    height: 4rem;
+    border-bottom: 1px solid #ff660069;
+}
+
+.easeCon004-1-1{
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.imgCon4{
+    min-width: 4.2rem;
+    height: 4.2rem;
+    border-radius: 7px;
+    border: 1px solid red;
+}
+
+.TextCon4 h5{
+    font-weight: 400;
+    font-size: 17px;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.TextCon4 p{
+    color: #ff9735;
+    font-size: 13px;
+    margin: 0;
+}
+
+.image-box:hover, .easeCon003:hover, .easeCon004:hover{
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 5px #e2e2e2;
+    cursor: pointer;
+}

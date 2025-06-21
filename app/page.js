@@ -286,7 +286,7 @@ export default function Home() {
       </div>
       <div className="conAllHomepage">
         <h2>Offers for you</h2>
-        <div className="conHomepage001">
+        <div className="conHomepage">
           <div className="header-wraper001">
             {visiblePromotions.map((promo, idx) => (
               <Link
@@ -303,6 +303,154 @@ export default function Home() {
             <i className="fa-solid fa-angle-left"></i>
           </span>
           <span className="prevnext prevnext2 next" onClick={nextPage} disabled={page === totalPages - 1} >
+            <i className="fa-solid fa-angle-right"></i>
+          </span>
+        </div>
+        <h2>Why choose Klook</h2>
+        <div className="conHomepage">
+          <div className="easeCon002">
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655841/ued/platform/Discover_the_possibilities.webp" width={50} height={50} alt="Discover the possibilities" />
+            <h3>Discover the possibilities</h3>
+            <p>With nearly half a million attractions, hotels & more, you're sure to find joy.</p>
+          </div>
+          <div className="easeCon002">
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Enjoy_deals_delights.webp" width={50} height={50} alt="Discover the possibilities" />
+            <h3>Enjoy deals & delights</h3>
+            <p>Quality activities. Great prices. Plus, earn Klook credits to save more.</p>
+          </div>
+          <div className="easeCon002">
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Exploring_made_easy.webp" width={50} height={50} alt="Discover the possibilities" />
+            <h3>Exploring made easy</h3>
+            <p>Book last minute, skip lines & get free cancellation for easier exploring.</p>
+          </div>
+          <div className="easeCon002">
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Travel_you_can_trust.webp" width={50} height={50} alt="Discover the possibilities" />
+            <h3>Travel you can trust</h3>
+            <p>Read reviews & get reliable customer support. We're with you at every step.</p>
+          </div>
+        </div>
+        <h2>Travelers' favorite choices</h2>
+        <div className="conHomepage">
+          <div className="easeCon003">
+            <div className="easeCon003-1"></div>
+            <div className="easeCon003-2"></div>
+          </div>
+          <div className="easeCon003">
+            <div className="easeCon003-1"></div>
+            <div className="easeCon003-2"></div>
+          </div>
+          <div className="easeCon003">
+            <div className="easeCon003-1"></div>
+            <div className="easeCon003-2"></div>
+          </div>
+          <div className="easeCon003">
+            <div className="easeCon003-1"></div>
+            <div className="easeCon003-2"></div>
+          </div>
+          <span className="prevnext prevnext2 prev" disabled={page === 0} >
+            <i className="fa-solid fa-angle-left"></i>
+          </span>
+          <span className="prevnext prevnext2 next" disabled={page === totalPages - 1} >
+            <i className="fa-solid fa-angle-right"></i>
+          </span>
+        </div>
+        <button className="btn-003">See more</button>
+        <h2>Travelers' favorite choice</h2>
+        <div className="conHomepage">
+          <div className="easeCon004">
+            <h3>Top things to do in Singapore</h3>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>National Museum of Singapore Ticket</h5>
+                  <p>Don't miss out on your last chance to ...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Universal Stidio Singapore Ticket</h5>
+                  <p>Make it a holiday to remember as yo...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Klook Pass Singapore</h5>
+                  <p>Get access to 2, 3, 4, or 5 top activitie...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="easeCon004">
+            <h3>Top things to do in Kuala Lumpur</h3>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Genting SkyWorlds Theme Park Tickets</h5>
+                  <p>The long-awaited Genting SkyWorlds...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Zoo Negara Ticket in Malaysia</h5>
+                  <p>View more than 5,137 animals from 47...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Sunway Lagoon Ticket</h5>
+                  <p>DEnjoy up to 90 rides and attraction in...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="easeCon004">
+            <h3>Top things to do in Bali</h3>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Nusa Penida Day Tour from Bali</h5>
+                  <p>Embark on a Nusa Penida day trip fro...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Mount Batur Sunrise Trekking Experience</h5>
+                  <p>Hike to the top of an active volcano, ...</p>
+                </div>
+              </div>
+            </div>
+            <div className="easeCon004-1">
+              <div className="easeCon004-1-1">
+                <div className="imgCon4" />
+                <div className="TextCon4">
+                  <h5>Waterbom Bali Ticket</h5>
+                  <p>Visit Waterbom Bali, the first tourism ...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span className="prevnext prevnext2 prev" disabled={page === 0} >
+            <i className="fa-solid fa-angle-left"></i>
+          </span>
+          <span className="prevnext prevnext2 next" disabled={page === totalPages - 1} >
             <i className="fa-solid fa-angle-right"></i>
           </span>
         </div>
