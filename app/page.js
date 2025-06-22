@@ -11,6 +11,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 import SearchModule from "@/component/searchModule";
 import { useRouter } from 'next/navigation';
 import Searching from "@/component/Searching";
+import travelersFavorite from "@/imformation/favoriteChoices";
 
 export default function Home() {
   const routerSearchText = useRouter();
@@ -130,19 +131,30 @@ export default function Home() {
 
   const itemsPerPage = 3;
   const totalPages = Math.ceil(promotions.length / itemsPerPage);
-
-  const [page, setPage] = useState(0); // ค่าระบุว่าอยู่ page ไหน
-
+  const [page, setPage] = useState(0);
   const nextPage = () => {
     if (page < totalPages - 1) setPage(page + 1);
   };
-
   const prevPage = () => {
     if (page > 0) setPage(page - 1);
   };
-
   const offset = page * itemsPerPage;
   const visiblePromotions = promotions.slice(offset, offset + itemsPerPage);
+
+  const [page003, setPage003] = useState(0);
+  const totalPages003 = Math.ceil(travelersFavorite.length / 4);
+  const setTranform003 = 1 / totalPages003;
+  const prevNext003 = (e) => {
+    const page3 = page003 + e;
+
+    if (page3 >= totalPages003) {
+      setPage003(totalPages003 - 1);
+    } else if (page3 < 0) {
+      setPage003(0);
+    } else {
+      setPage003(page3);
+    }
+  };
 
   return (
     <>
@@ -309,48 +321,59 @@ export default function Home() {
         <h2>Why choose Klook</h2>
         <div className="conHomepage">
           <div className="easeCon002">
-            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655841/ued/platform/Discover_the_possibilities.webp" width={50} height={50} alt="Discover the possibilities" />
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655841/ued/platform/Discover_the_possibilities.webp" width={60} height={60} alt="Discover the possibilities" />
             <h3>Discover the possibilities</h3>
             <p>With nearly half a million attractions, hotels & more, you're sure to find joy.</p>
           </div>
           <div className="easeCon002">
-            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Enjoy_deals_delights.webp" width={50} height={50} alt="Discover the possibilities" />
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Enjoy_deals_delights.webp" width={60} height={60} alt="Discover the possibilities" />
             <h3>Enjoy deals & delights</h3>
             <p>Quality activities. Great prices. Plus, earn Klook credits to save more.</p>
           </div>
           <div className="easeCon002">
-            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Exploring_made_easy.webp" width={50} height={50} alt="Discover the possibilities" />
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Exploring_made_easy.webp" width={60} height={60} alt="Discover the possibilities" />
             <h3>Exploring made easy</h3>
             <p>Book last minute, skip lines & get free cancellation for easier exploring.</p>
           </div>
           <div className="easeCon002">
-            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Travel_you_can_trust.webp" width={50} height={50} alt="Discover the possibilities" />
+            <Image src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_112,h_112/v1663655837/ued/platform/Travel_you_can_trust.webp" width={60} height={60} alt="Discover the possibilities" />
             <h3>Travel you can trust</h3>
             <p>Read reviews & get reliable customer support. We're with you at every step.</p>
           </div>
         </div>
         <h2>Travelers' favorite choices</h2>
         <div className="conHomepage">
-          <div className="easeCon003">
-            <div className="easeCon003-1"></div>
-            <div className="easeCon003-2"></div>
+          <div style={{ position: "relative", overflow: "hidden" }}>
+            <div className="conHomepage003" style={{ transform: `translateX(-${page003 * setTranform003 * 100}%)`, transition: "transform 0.5s ease-in-out", width: `${totalPages003 * 100}%` }}>
+              {travelersFavorite.map((data, index) => (
+                <div className="easeCon003" key={index} style={{ margin: "0" }}>
+                  <div className="easeCon003-1" style={{ backgroundImage: `url(${data.url})`, backgroundSize: "cover" }} />
+                  <div className="easeCon003-2">
+                    <div style={{ display: "flex", gap: "0.5rem", fontSize: "14px", color: "#7e7e7e", marginBottom: "0.1rem" }}>
+                      <div style={{ margin: "0" }}>{data.type}</div>
+                      <div style={{ margin: "0" }}>• {data.where}</div>
+                    </div>
+                    <h4 style={{ margin: "0", fontWeight: "500", marginBottom: "0.1rem" }}>{data.name}</h4>
+                    <p style={{ margin: "0", fontSize: "12px", backgroundColor: "#e2e2e2", padding: "0.1rem 0.2rem", color: "#7e7e7e", display: "inline-block", marginBottom: "0.1rem" }}>{data.etc[0]}</p>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <p style={{ margin: "0", color: "#ff9735", fontWeight: "500" }}>★ {data.rate}</p>
+                      <p style={{ margin: "0", color: "#7e7e7e" }}>({data.review})</p>
+                      <p style={{ margin: "0", marginLeft: "0.5rem", color: "#7e7e7e" }}>• {data.booked} booked</p>
+                    </div>
+                    <div style={{ position: "absolute", gap: "0.5rem", display: "flex", bottom: "0.7rem", left: "0rem" }}>
+                      <span style={{ fontWeight: "500" }}>From US$ {data.price}</span>
+                      <span style={{ textDecoration: "line-through", color: "#7e7e7e" }}>US$ {data.exprice}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="easeCon003">
-            <div className="easeCon003-1"></div>
-            <div className="easeCon003-2"></div>
-          </div>
-          <div className="easeCon003">
-            <div className="easeCon003-1"></div>
-            <div className="easeCon003-2"></div>
-          </div>
-          <div className="easeCon003">
-            <div className="easeCon003-1"></div>
-            <div className="easeCon003-2"></div>
-          </div>
-          <span className="prevnext prevnext2 prev" disabled={page === 0} >
+
+          <span className="prevnext prevnext2 prev" onClick={() => prevNext003(-1)} style={{display: `${page003 <= 0 ? "none" : ""}`}}>
             <i className="fa-solid fa-angle-left"></i>
           </span>
-          <span className="prevnext prevnext2 next" disabled={page === totalPages - 1} >
+          <span className="prevnext prevnext2 next" onClick={() => prevNext003(1)} style={{display: `${page003 >= totalPages003 - 1 ? "none" : ""}`}}>
             <i className="fa-solid fa-angle-right"></i>
           </span>
         </div>
@@ -364,7 +387,7 @@ export default function Home() {
                 <div className="imgCon4" />
                 <div className="TextCon4">
                   <h5>National Museum of Singapore Ticket</h5>
-                  <p>Don't miss out on your last chance to ...</p>
+                  <p>Don't miss out on your last chance...</p>
                 </div>
               </div>
             </div>
@@ -447,12 +470,164 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <span className="prevnext prevnext2 prev" disabled={page === 0} >
+          <span className="prevnext prevnext2 prev" >
             <i className="fa-solid fa-angle-left"></i>
           </span>
-          <span className="prevnext prevnext2 next" disabled={page === totalPages - 1} >
+          <span className="prevnext prevnext2 next"  >
             <i className="fa-solid fa-angle-right"></i>
           </span>
+        </div>
+        <h2>Inspiration for your itinerary</h2>
+        <div className="conHomepage">
+          <div className="easeCon005">
+            <h3>Best staycation deals</h3>
+            <p>Enjoy these cool staycation promotions in Singapore</p>
+            <div className="btn-ease005">See activities</div>
+          </div>
+          <div className="easeCon005">
+            <h3>All Time Favourite Activities in Dubai</h3>
+            <p>Don't forget to check out activities while you're here</p>
+            <div className="btn-ease005">See activities</div>
+          </div>
+        </div>
+        <h2>Where to next?</h2>
+        <div className="conHomepage">
+          <div className="easeCon006">
+            <h3>Bangkok</h3>
+          </div>
+          <div className="easeCon006">
+            <h3>Hong Kong</h3>
+          </div>
+          <div className="easeCon006">
+            <h3>Phuket</h3>
+          </div>
+          <div className="easeCon006">
+            <h3>Osaka</h3>
+          </div>
+          <div className="easeCon006">
+            <h3>Tokyo</h3>
+          </div>
+          <div className="easeCon006">
+            <h3>Pattaya</h3>
+          </div>
+          <span className="prevnext prevnext2 prev"  >
+            <i className="fa-solid fa-angle-left"></i>
+          </span>
+          <span className="prevnext prevnext2 next"  >
+            <i className="fa-solid fa-angle-right"></i>
+          </span>
+        </div>
+        <button className="btn-003 btn-006">See all</button>
+        <h2>More to explore</h2>
+        <div className="conHomepage">
+          <div className="easeCon007">
+            <Image src="https://res.klook.com/image/upload/v1640179720/veeon5jzqyjccj5m3lkg.webp" width={220} height={180} alt="0" />
+            <div className="easeCon007-text">
+              <h3>Check out the Klook blog</h3>
+              <p>Follow the team's musings on trends in travel, itinerary ideas and travel tips</p>
+              <button>Read now</button>
+            </div>
+          </div>
+          <div className="easeCon007">
+            <Image src="https://res.klook.com/image/upload/v1640179766/arto4pac628jzdsuu3df.webp" width={220} height={180} alt="0" />
+            <div className="easeCon007-text">
+              <h3>Save on fun with <br />KloolCash</h3>
+              <p>Find out how to save more When you book and leave a review</p>
+              <button>How KlookCash works</button>
+            </div>
+          </div>
+          <div className="easeCon007">
+            <Image src="https://res.klook.com/image/upload/v1640179875/ggxmmubhiq9nxkbobcro.webp" width={220} height={180} alt="0" />
+            <div className="easeCon007-text">
+              <h3>Share joy & get rewarded</h3>
+              <p>After your friend signs up and completes a booking, you'll get a US$5 reward!</p>
+              <button>Invite friends</button>
+            </div>
+          </div>
+        </div>
+        <h2>Explore more on Klook</h2>
+        <h3>Top attractions in United States</h3>
+        <div className="conHomepage008">
+          <div className="easeCon008">
+            <div className="easeCon008-num">1</div>
+            <div className="easeCon008-text">Grand Canyon</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">2</div>
+            <div className="easeCon008-text">Upper Antelope Canyon</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">3</div>
+            <div className="easeCon008-text">Statue of Liberty</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">4</div>
+            <div className="easeCon008-text">Universal Studios Hollywood</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">5</div>
+            <div className="easeCon008-text">Niagara Falls</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">6</div>
+            <div className="easeCon008-text">Alcatraz Island</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">7</div>
+            <div className="easeCon008-text">Yosemite National Park</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">8</div>
+            <div className="easeCon008-text">Disneyland Resort</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">9</div>
+            <div className="easeCon008-text">Kualoa Ranch</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">10</div>
+            <div className="easeCon008-text">Las Vegas Strip</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">11</div>
+            <div className="easeCon008-text">Lower Antelope Canyon</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">12</div>
+            <div className="easeCon008-text">The Metropolitan Museum of Art</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">13</div>
+            <div className="easeCon008-text">Golden Gate Bridge</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">14</div>
+            <div className="easeCon008-text">Broadway</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">15</div>
+            <div className="easeCon008-text">The White House</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">16</div>
+            <div className="easeCon008-text">Hollywood</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">17</div>
+            <div className="easeCon008-text">Griffith Observatory</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">18</div>
+            <div className="easeCon008-text">Time Square</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">19</div>
+            <div className="easeCon008-text">Hollywood Walk of Fame</div>
+          </div>
+          <div className="easeCon008">
+            <div className="easeCon008-num">20</div>
+            <div className="easeCon008-text">The Dallas Arboretum and Botanical Garden</div>
+          </div>
         </div>
       </div>
     </>
