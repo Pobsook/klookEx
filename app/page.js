@@ -14,6 +14,7 @@ import Searching from "@/component/Searching";
 import travelersFavorite from "@/imformation/favoriteChoices";
 import useExchangeRates from "@/api/api_exchangerate";
 import topThindtodo from "@/imformation/topThindtodo";
+import whereToNext from "@/imformation/whereTonext";
 
 export default function Home() {
 
@@ -89,7 +90,6 @@ export default function Home() {
 
   const [index, setIndex] = useState(1) // เริ่มที่ index 1 เพราะมี clone ด้านหน้า
   const [transition, setTransition] = useState(true)
-  const sliderRef = useRef()
 
   const extendedImages = [images[images.length - 1], ...images, images[0]] // clone รูป
 
@@ -207,6 +207,20 @@ export default function Home() {
       setPage004(page4);
     }
   };
+
+  const [page006, setPage006] = useState(0);
+  const totalPages006 = Math.ceil(whereToNext.length / 6);
+  const setTranform006 = 1 / totalPages006;
+  const prevNext006 = (e) => {
+    const page6 = page006 + e;
+    if(page6 >= totalPages006){
+      setPage006(totalPages006 - 1)
+    }else if(page6 < 0){
+      setPage006(0)
+    }else{
+      setPage006(page6)
+    }
+  }
 
   return (
     <>
@@ -337,7 +351,6 @@ export default function Home() {
         </div>
         <div className="slider-wrapper">
           <div
-            ref={sliderRef}
             className="slider-track"
             style={{
               transform: `translateX(-${index * 100}%)`,
@@ -365,7 +378,7 @@ export default function Home() {
           <h2>Offers for you</h2>
           <div className="conHomepage">
             <div className="header-wraper001">
-              <div className="conHomePage001" style={{ transform: `translateX(-${page * setTranform * 100}%)`, transition: "transform 0.5s ease-in-out", width: `${totalPages * 100}%` }}>
+              <div className="conHomePage001" style={{ transform: `translateX(-${page * setTranform * 100}%)`, transition: "transform 0.3s ease-in-out", width: `${totalPages * 100}%` }}>
                 {promotions.map((promo, idx) => (
                   <Link
                     key={idx}
@@ -415,7 +428,7 @@ export default function Home() {
           <h2>Travelers' favorite choices</h2>
           <div className="conHomepage">
             <div style={{ position: "relative", overflow: "hidden" }}>
-              <div className="conHomepage003" style={{ transform: `translateX(-${page003 * setTranform003 * 100}%)`, transition: "transform 0.5s ease-in-out", width: `${totalPages003 * 100}%` }}>
+              <div className="conHomepage003" style={{ transform: `translateX(-${page003 * setTranform003 * 100}%)`, transition: "transform 0.3s ease-in-out", width: `${totalPages003 * 100}%` }}>
                 {travelersFavorite.map((data, index) => (
                   <div className="easeCon003" key={index} style={{ margin: "0" }}>
                     <div className="easeCon003-1" style={{ backgroundImage: `url(${data.url})`, backgroundSize: "cover" }} />
@@ -453,14 +466,16 @@ export default function Home() {
           <h2>Travelers' favorite choice</h2>
           <div className="conHomepage">
             <div style={{ position: "relative", overflow: "hidden", paddingTop: "0.5rem" }}>
-              <div style={{ transform: `translateX(-${page004 * setTranform004 * 100}%)`, width: `${totalPages004 * 100}%`, display: "flex", gap: "1.5rem", transition: "transform 0.5s ease-in-out", position: "relative" }}>
+              <div style={{ transform: `translateX(-${page004 * setTranform004 * 100}%)`, width: `${totalPages004 * 100}%`, display: "flex", gap: "1.5rem", transition: "transform 0.3s ease-in-out", position: "relative" }}>
                 {topThindtodo.map((data, index) => (
                   <div key={index} className="easeCon004">
-                    <div className="cardGradient004"/>
+                    <div className="cardGradient004" />
                     <h3>Top things to do in {data.city}</h3>
                     {data.activities.map((activity, subIndex) => (
                       <div key={subIndex} className="easeCon004-1-1">
-                        <div className="imgCon4" style={{ backgroundImage: `url(${activity.img})`, backgroundSize: "cover" }} />
+                        <div className="imgCon4" style={{ backgroundImage: `url(${activity.img})`, backgroundSize: "cover" }}>
+                          <div className="num004">{subIndex + 1}</div>
+                        </div>
                         <div className="TextCon4">
                           <h5>{activity.nameeActi}</h5>
                           <p>{activity.info}</p>
@@ -482,12 +497,12 @@ export default function Home() {
         <div className="con">
           <h2>Inspiration for your itinerary</h2>
           <div className="conHomepage">
-            <div className="easeCon005">
+            <div className="easeCon005" style={{ backgroundImage: "url(http://res.klook.com/image/upload/v1644919107/ymqicjublxq6oid4xsur.webp)", backgroundSize: "cover" }}>
               <h3>Best staycation deals</h3>
               <p>Enjoy these cool staycation promotions in Singapore</p>
               <div className="btn-ease005">See activities</div>
             </div>
-            <div className="easeCon005">
+            <div className="easeCon005" style={{ backgroundImage: "url(http://res.klook.com/image/upload/v1634175091/bn8zsheety1cwg3yjclm.webp)", backgroundSize: "cover" }} >
               <h3>All Time Favourite Activities in Dubai</h3>
               <p>Don't forget to check out activities while you're here</p>
               <div className="btn-ease005">See activities</div>
@@ -497,28 +512,19 @@ export default function Home() {
         <div className="con">
           <h2>Where to next?</h2>
           <div className="conHomepage">
-            <div className="easeCon006">
-              <h3>Bangkok</h3>
+            <div style={{ position: "relative", overflow: "hidden", paddingTop: "0.3rem" }}>
+              <div style={{position: "relative", display: "flex", gap: "1.11rem", transform: `translateX(-${page006 * setTranform006 * 100}%)`, width: `${totalPages006 * 100}%`, transition: "transform ease-in-out 0.3s"}}>
+                {whereToNext.map((data, index) => (
+                  <div key={index} className="easeCon006" style={{ backgroundImage: `linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0)), url(${data.img})`, backgroundSize: "cover" }}>
+                    <h3 style={{ color: "white", fontWeight: "500" }}>{data.city}</h3>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="easeCon006">
-              <h3>Hong Kong</h3>
-            </div>
-            <div className="easeCon006">
-              <h3>Phuket</h3>
-            </div>
-            <div className="easeCon006">
-              <h3>Osaka</h3>
-            </div>
-            <div className="easeCon006">
-              <h3>Tokyo</h3>
-            </div>
-            <div className="easeCon006">
-              <h3>Pattaya</h3>
-            </div>
-            <span className="prevnext prevnext2 prev"  >
+            <span className="prevnext prevnext2 prev" onClick={() => prevNext006(-1)} style={{display: `${page006 <= 0 ? "none" : ""}` }}>
               <i className="fa-solid fa-angle-left"></i>
             </span>
-            <span className="prevnext prevnext2 next"  >
+            <span className="prevnext prevnext2 next" onClick={() => prevNext006(1)} style={{display: `${page006 >= totalPages006 - 1 ? "none" : ""}` }}>
               <i className="fa-solid fa-angle-right"></i>
             </span>
           </div>

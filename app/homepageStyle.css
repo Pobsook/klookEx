@@ -461,10 +461,21 @@ li[data-hp002]:hover {
 }
 
 .imgCon4{
+    position: relative;
     min-width: 4.2rem;
     height: 4.2rem;
     border-radius: 7px;
-    border: 1px solid red;
+}
+
+.num004{
+    background-color: #ff6600;
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    padding: 0.1rem 0.3rem ;
+    color: white;
+    font-size: 12px;
+    border-radius: 7px 0 0 0;
 }
 
 .TextCon4 h5{
@@ -491,9 +502,10 @@ li[data-hp002]:hover {
     width: 50%;
     height: 18rem;
     border-radius: 10px;
-    border: 1px solid red;
+    border: 1px solid #cecece;
     padding: 1.5rem;
     transition: 0.3s;
+    color: white;
 }
 
 .easeCon005 h3{
@@ -515,13 +527,14 @@ li[data-hp002]:hover {
     width: 5.5rem;
     border: 1px solid #f3f3f3;
     bottom: 1.5rem;
+    color: black;
 }
 
 .easeCon006{
     position: relative;
-    border: 1px solid red;
+    border: 1px solid #cecece;
     height: 15rem;
-    width: 16.66%;
+    min-width: 11rem;
     border-radius: 7px;
     transition: 0.3s;
 }
