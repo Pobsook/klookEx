@@ -37,6 +37,7 @@ const travelersFavorite = [
         review: 21532,
         booked: 300000,
         price: 6.09,
+        exprice: 0,
         url: "https://res.klook.com/image/upload/fl_lossy.progressive,w_500,h_334,c_fill,q_85/activities/ih46omilvgqph4pbqb4g.webp"
     }, {
         name: "5G Thailand eSIM | AIS DTAC",

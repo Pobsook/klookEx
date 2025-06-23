@@ -130,7 +130,7 @@ export default function SearchModule() {
                                         className="imgTrending"
                                     />
                                     <div style={{ display: "flex", flexDirection: "column", paddingTop: "0.7rem" }}>
-                                        <p style={{ padding: 0, margin: 0, flexWrap: "wrap", fontSize: "14px" }}>
+                                        <p style={{ padding: 0, margin: 0, flexWrap: "wrap", fontSize: "12px" }}>
                                             {data.name} : {data.description}
                                         </p>
                                         <div className="pTrending pTopSearch">

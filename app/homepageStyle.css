@@ -9,19 +9,25 @@
     width: 100%;
     position: fixed;
     z-index: 2;
-    display: flex;
-    margin-block: 3.7rem;
-    height: 3.7rem;
+    margin-top: 3.7rem;
+    height: 3.8rem;
     max-height: 3.7rem;
-    align-items: center;
-    padding-left: 20rem;
     border-bottom: 1px solid #e2e2e2;
     background-color: white;
+}
+
+.conList{
+    width: 75rem;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding-inline: 3rem;
 }
 
 li[data-hp001],
 li[data-hp002] {
     list-style: none;
+    height: 1.2rem;
     max-height: 3.7rem;
     padding: 1.2rem 1rem;
     outline-style: none;
@@ -166,6 +172,7 @@ li[data-hp002]:hover {
 
 .conBanner {
     position: relative;
+    z-index: 1;
     margin-top: 7.4rem;
     width: 100%;
     height: 30rem;
@@ -173,7 +180,8 @@ li[data-hp002]:hover {
 }
 
 .slider-wrapper {
-    position: relative;
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 30rem;
     overflow: hidden;
@@ -225,22 +233,24 @@ li[data-hp002]:hover {
 }
 
 .ddesdw {
-    position: absolute;
-    z-index: 1;
-    margin-left: 12rem;
-    margin-top: 9rem;
+    position: relative;
+    height: 30rem;
+    width: 72.9rem;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin: auto;
+    padding-left: 5rem;
 }
 
-.ddesdw h2 {
+.ddesdw .h2 {
     font-size: 70px;
     padding: 0;
     margin: 0;
 }
 
-.ddesdw p {
+.ddesdw .p {
     font-size: 25px;
     padding: 0;
     margin: 0;
@@ -255,7 +265,7 @@ li[data-hp002]:hover {
 }
 
 .inputSearch {
-    position: absolute;
+    position: relative;
     padding-left: 3rem;
     height: 3rem;
     width: 46rem;
@@ -278,7 +288,7 @@ li[data-hp002]:hover {
 
 .btn-search {
     position: absolute;
-    z-index: 20;
+    z-index: 30;
     right: 0rem;
     top: 1.57rem;
     transform: translateY(-50%);
@@ -294,8 +304,7 @@ li[data-hp002]:hover {
 }
 
 .image-box {
-    min-width: 23.5rem;
-    width: 33.33%;
+    width: 23.3rem;
     height: 10rem;
     border-radius: 13px;
     transition: 0.3s;
@@ -303,9 +312,6 @@ li[data-hp002]:hover {
 }
 
 .conAllHomepage {
-    margin: auto;
-    width: 72.8rem;
-    padding-inline: 11rem;
     display: flex;
     flex-direction: column;
 }
@@ -316,8 +322,15 @@ li[data-hp002]:hover {
 }
 
 .header-wraper001 {
+    position: relative;
+    overflow: hidden;
+    height: 10rem;
+    padding-top: 0.5rem;
+}
+
+.conHomePage001{
+    position: relative;
     display: flex;
-    justify-content: space-between;
     gap: 1.17rem;
 }
 
@@ -340,12 +353,20 @@ li[data-hp002]:hover {
 }
 
 .conHomepage{
+    width: 72.9rem;
+    margin: auto;
     position: relative;
     display: flex;
     justify-content: space-between;
     gap: 1rem;
 }
 
+.con{
+    position: relative;
+    width: 72.9rem;
+    margin: auto;
+    padding-inline: 5rem;
+}
 .easeCon002{
     width: 25%;
     padding: 0.5rem;
@@ -394,7 +415,9 @@ li[data-hp002]:hover {
 }
 
 .btn-003{
-    margin: auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     margin-top: 2rem;
     height: 2.2rem;
     width: 20rem;
@@ -408,12 +431,22 @@ li[data-hp002]:hover {
 }
 
 .easeCon004{
+    position: relative;
     padding: 1.5rem;
-    width: 33%;
+    width: 20rem;
     height: 21rem;
     border-radius: 10px;
-    border: 1px solid red;
+    border: 1px solid #cecece;
     transition: 0.3s;
+}
+
+.cardGradient004{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background: linear-gradient(180deg, #ff88001c, #ff880000);
 }
 
 .easeCon004 h3{
@@ -436,7 +469,7 @@ li[data-hp002]:hover {
 
 .TextCon4 h5{
     font-weight: 400;
-    font-size: 17px;
+    font-size: 15px;
     margin-top: 0.2rem;
     margin-bottom: 0.5rem;
 }
@@ -516,7 +549,7 @@ li[data-hp002]:hover {
     width: 33%;
     height: 22rem;
     padding: 1.3rem;
-    border: 1px solid red;
+    border: 1px solid #cecece;
     justify-content: center;
     align-items: center;
     border-radius: 10px;

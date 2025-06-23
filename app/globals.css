@@ -8,14 +8,20 @@ body {
 nav {
   z-index: 4;
   width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   height: 3.7rem;
   max-height: 3.7rem;
   border-bottom: 1px solid #e2e2e2;
   position: fixed;
   background-color: white;
+}
+
+.conNav{
+  width: 72.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding-inline: 5rem;
 }
 
 .navTopLeft {
@@ -142,8 +148,8 @@ nav {
 .conSearchList2{
   z-index: 21;
   display: flex;
-  top: 20.7rem;
-  left: 12rem;
+  top: 21rem;
+  margin: auto;
 }
 
 .conTopandTrendList {
